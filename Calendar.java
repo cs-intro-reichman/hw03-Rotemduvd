@@ -14,7 +14,7 @@ public class Calendar {
 	    int debugDaysCounter = 1; 
 	 	while (year<yearafter) {	
 	 		
-			System.out.print(dayOfMonth +"."+ month + "." + year);
+			System.out.print(dayOfMonth +"/"+ month + "/" + year);
 			
 			if (debugDaysCounter % 7 == 0 ) {
 				
