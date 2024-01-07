@@ -16,7 +16,9 @@ public class LoanCalc {
 		double loan = Double.parseDouble(args[0]);
 		double rate = Double.parseDouble(args[1]);
 		int n = Integer.parseInt(args[2]);
+		//double payment = Integer.parseInt(args[3]);
 		System.out.println("Loan sum = " + loan + ", interest rate = " + rate + "%, periods = " + n);
+		//System.out.println("end balance = " + endBalance(loan, rate, n, payment));
 		
 		// Computes the periodical payment using brute force search
 		System.out.print("Periodical payment, using brute force: ");
@@ -39,8 +41,15 @@ public class LoanCalc {
 	*/
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-    	return 0;
+    	double g = (loan/n);
+		double change = endBalance(loan, rate, n, g);
+		iterationCounter = 0;
+		while (change>0){
+			g = g + epsilon; 
+			change = endBalance(loan, rate, n, g);
+			iterationCounter++ ;
+		}
+    	return g;
     }
     
     /**
@@ -51,8 +60,25 @@ public class LoanCalc {
 	*/
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-    	// Replace the following statement with your code
-    	return 0;
+    	double L = (loan/n);
+		double H = loan;
+		iterationCounter = 0;
+		double g = ((H+L)/2);
+		
+		while ((H-L)>epsilon) {
+			if ((endBalance(loan, rate, n, g)*(endBalance(loan, rate, n, L))) > 0 ){
+				L=g;
+				g = ((H+L)/2);
+			} else {
+				H=g;
+				g = ((H+L)/2);
+
+			} 
+			iterationCounter++;
+			
+		}
+
+    	return g;
     }
 	
 	/**
@@ -60,7 +86,12 @@ public class LoanCalc {
 	* interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	*/
 	private static double endBalance(double loan, double rate, int n, double payment) {
-		// Replace the following statement with your code
-    	return 0;
+		double leftBef = loan;
+		for(int cycles = 0; cycles < n; cycles++){
+			double left = (leftBef - payment)*(1 + (rate/100));
+			leftBef = left;
+		}
+		return leftBef;
+
 	}
 }
