@@ -9,18 +9,18 @@ public class Calendar {
 	
 	
 	public static void main(String args[]) {
-		year = Integer.parseInt(args[0]);
-		int yearafter = year + 1;
+		int selctedyear = Integer.parseInt(args[0]);
 	    int debugDaysCounter = 1; 
-	 	while (year<yearafter) {	
-	 		
-			System.out.print(dayOfMonth +"/"+ month + "/" + year);
+	 	while (year<= selctedyear) {	
+	 		if (year == selctedyear) {
+				System.out.print(dayOfMonth +"/"+ month + "/" + year);
 			
-			if (debugDaysCounter % 7 == 0 ) {
-				
-				System.out.print(" Sunday");	
+				if (debugDaysCounter % 7 == 0 ) {
+					
+					System.out.print(" Sunday");	
+				}
 			}
-
+			
 			System.out.println();
 			advance();
 			
